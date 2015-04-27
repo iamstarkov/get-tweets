@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 10000 --require babel/register",
+    "tdd": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,10 @@
   "homepage": "https://github.com/iamstarkov/fetch-twitter-account#readme",
   "dependencies": {
     "bluebird": "^2.9.24",
-    "flatit": "^1.1.0",
-    "npmlog": "^1.2.0",
     "twitter": "^1.2.5"
+  },
+  "devDependencies": {
+    "babel": "^5.1.13",
+    "mocha": "^2.2.4"
   }
 }
