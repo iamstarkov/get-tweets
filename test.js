@@ -25,7 +25,7 @@ it('should fetch 3 recent tweets properly', (done)=> {
 });
 
 it('should fetch all tweets', (done)=> {
-  const options = { screen_name: 'largescalejs_ru', trim_user: true, count: 20 };
+  const options = { screen_name: 'largescalejs_ru', trim_user: true, count: 5 };
   getAllTweets(tokens, options).then((tweets)=> {
     equal(tweets.length, 37);
     equal(tweets[0].text, `@iyntx Я думаю поступить иначе http://t.co/NNKMLl9z9c… но пока времени на это нет совсем`);
