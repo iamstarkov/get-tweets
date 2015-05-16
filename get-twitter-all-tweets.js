@@ -6,9 +6,10 @@ import api           from './api';
 const last = (arr)=> arr[arr.length - 1];
 const getMaxId = (items)=> bignum(last(items).id_str).sub('1').toString(10);
 const _options = { trim_user: false, count: 200, include_rts: true, exclude_replies: false };
+const assign = Object.assign.bind(Object);
 
 export default(tokens, screen_name)=> {
-  const options = Object.assign({screen_name}, _options);
+  const options = assign({screen_name}, _options);
   var storage = { items: [], missed: 0 };
   return api.usersShow(tokens, options).then((info)=> {
     console.log(`## @${info.screen_name}, ${info.statuses_count}`);
@@ -20,7 +21,7 @@ export default(tokens, screen_name)=> {
         }
         console.log(`${storage.items.length + storage.missed}`);
         storage.missed += options.count - timeline.length;
-        return api.statusesUserTimeline(tokens, Object.assign(options, { max_id: getMaxId(storage.items) })).then(setTimeline);
+        return api.statusesUserTimeline(tokens, assign(options, { max_id: getMaxId(storage.items) })).then(setTimeline);
       };
       return api.statusesUserTimeline(tokens, options).then(setTimeline);
     });
