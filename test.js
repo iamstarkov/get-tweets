@@ -13,8 +13,7 @@ it('should fetch tweets count', (done)=> {
 });
 
 it('should fetch all tweets in small account < 200 tweets', (done)=> {
-  const options = { screen_name: 'largescalejs_ru', trim_user: true, count: 200, include_rts: 1, exclude_replies: 0 };
-  getAllTweets(tokens, options).then((tweets)=> {
+  getAllTweets(tokens, 'largescalejs_ru').then((tweets)=> {
     equal(tweets.list.length + tweets.missed, 37);
     done();
   });
@@ -22,8 +21,7 @@ it('should fetch all tweets in small account < 200 tweets', (done)=> {
 
 it('should fetch all 1600+ tweets for @andrestaltz', (done)=> {
   getInfo(tokens, { screen_name: 'andrestaltz' }).then((info)=> {
-    const options = { screen_name: 'andrestaltz', trim_user: true, count: 200, include_rts: 1, exclude_replies: 0 };
-    getAllTweets(tokens, options).then((tweets)=> {
+    getAllTweets(tokens, 'andrestaltz').then((tweets)=> {
       equal(tweets.list.length + tweets.missed, info.statuses_count);
       done();
     });
@@ -32,8 +30,7 @@ it('should fetch all 1600+ tweets for @andrestaltz', (done)=> {
 
 it('should fetch all 1900+ tweets for @Rygu', (done)=> {
   getInfo(tokens, { screen_name: 'Rygu' }).then((info)=> {
-    const options = { screen_name: 'Rygu', trim_user: false, count: 200, include_rts: true, exclude_replies: false, contributor_details: true };
-    getAllTweets(tokens, options).then((tweets)=> {
+    getAllTweets(tokens, 'Rygu').then((tweets)=> {
       equal(tweets.list.length + tweets.missed, info.statuses_count);
       done();
     });
@@ -42,8 +39,7 @@ it('should fetch all 1900+ tweets for @Rygu', (done)=> {
 
 it('should fetch all 2400+ tweets for @jsunderhood', (done)=> {
   getInfo(tokens, { screen_name: 'jsunderhood' }).then((info)=> {
-    const options = { screen_name: 'jsunderhood', trim_user: true, count: 200, include_rts: 1, exclude_replies: 0 };
-    getAllTweets(tokens, options).then((tweets)=> {
+    getAllTweets(tokens, 'jsunderhood').then((tweets)=> {
       equal(tweets.list.length + tweets.missed, info.statuses_count);
       done();
     });

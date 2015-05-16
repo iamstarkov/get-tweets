@@ -5,8 +5,17 @@ import getTimeline   from './get-twitter-timeline';
 import bignum        from 'bignum';
 
 const last = (arr)=> arr[arr.length - 1];
+const _options = {
+  trim_user: false,
+  count: 200,
+  include_rts: true,
+  exclude_replies: false
+};
 
-export default(tokens, options)=> {
+
+export default(tokens, screen_name)=> {
+  const options = Object.assign({screen_name}, _options);
+  
   var items = [];
   var missed = 0;
   return getInfo(tokens, options)
