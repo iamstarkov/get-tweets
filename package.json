@@ -1,7 +1,7 @@
 {
   "name": "get-tweets",
   "version": "0.1.0",
-  "description": "",
+  "description": "Get all tweets for target username",
   "main": "index.js",
   "scripts": {
     "coverage": "istanbul cover _mocha -- --timeout 300000 --require babel/register",
