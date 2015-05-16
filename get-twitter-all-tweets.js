@@ -18,23 +18,22 @@ export default(tokens, screen_name)=> {
   const options = Object.assign({screen_name}, _options);
   var storage = { items: [], missed: 0 };
 
-  return getInfo(tokens, options)
-    .then((info)=> {
-      console.log(`## @${info.screen_name}, ${info.statuses_count}`);
-      return new Promise((resolved, reject)=> {
-        const setTimeline = (timeline)=> {
-          storage.items = storage.items.concat(timeline);
+  return getInfo(tokens, options).then((info)=> {
+    console.log(`## @${info.screen_name}, ${info.statuses_count}`);
+    return new Promise((resolved, reject)=> {
+      const setTimeline = (timeline)=> {
+        storage.items = storage.items.concat(timeline);
 
-          if (storage.items.length + storage.missed === info.statuses_count) {
-            return resolved(storage);
-          }
+        if (storage.items.length + storage.missed === info.statuses_count) {
+          return resolved(storage);
+        }
 
-          console.log(`${storage.items.length + storage.missed}`);
-          storage.missed += options.count - timeline.length;
-          return getTimeline(tokens, Object.assign(options, { max_id: getMaxId(storage.items) })).then(setTimeline);
-        };
+        console.log(`${storage.items.length + storage.missed}`);
+        storage.missed += options.count - timeline.length;
+        return getTimeline(tokens, Object.assign(options, { max_id: getMaxId(storage.items) })).then(setTimeline);
+      };
 
-        return getTimeline(tokens, options).then(setTimeline);
-      });
+      return getTimeline(tokens, options).then(setTimeline);
     });
+  });
 };
