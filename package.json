@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/iamstarkov/get-tweets#readme",
   "dependencies": {
+    "bignum": "^0.10.0",
     "bluebird": "^2.9.24",
     "twitter": "^1.2.5"
   },
