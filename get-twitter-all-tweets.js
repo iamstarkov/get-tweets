@@ -11,15 +11,12 @@ export default(tokens, options)=> {
   var missed = 0;
   return getInfo(tokens, options)
     .then((info)=> {
-      var count = info[0].statuses_count;
-      console.log(`## @${info[0].screen_name}, ${count}`);
+      console.log(`## @${info.screen_name}, ${info.statuses_count}`);
       return new Promise((resolved, reject)=> {
-        const setTimeline = (res)=> {
-          var timeline = res[0];
-
+        const setTimeline = (timeline)=> {
           items = items.concat(timeline);
 
-          if (items.length + missed !== count) {
+          if (items.length + missed !== info.statuses_count) {
             console.log(`${items.length + missed}`);
             missed += options.count - timeline.length;
             return getTimeline(tokens, Object.assign(options, {
@@ -27,10 +24,7 @@ export default(tokens, options)=> {
             })).then(setTimeline);
           }
 
-          resolved({
-            missed: missed,
-            list: items
-          });
+          resolved({ missed: missed, list: items });
         };
 
         return getTimeline(tokens, options).then(setTimeline);

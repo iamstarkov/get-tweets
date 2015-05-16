@@ -3,5 +3,9 @@ import Promise from 'bluebird';
 
 export default (tokens, options)=> {
   const client = Promise.promisifyAll(new Twitter(tokens));
-  return client.getAsync('/users/show.json', options);
+  return new Promise((resolved, reject)=> {
+    client.getAsync('/users/show.json', options).then((res)=> {
+      resolved(res[0]);
+    });
+  })
 };
