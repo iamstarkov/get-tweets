@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 10000 --require babel/register",
+    "test": "mocha --timeout 100000 --require babel/register",
     "tdd": "npm test -- --watch"
   },
   "repository": {

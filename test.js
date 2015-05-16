@@ -13,23 +13,50 @@ it('should fetch tweets count', (done)=> {
   });
 });
 
-it('should fetch 3 recent tweets properly', (done)=> {
-  getTimeline(tokens, { screen_name: 'largescalejs_ru', count: 3 }).then((res) => {
-    var timeline = res[0];
-    equal(timeline.length, 3);
-    equal(timeline[0].text, '@iyntx Я думаю поступить иначе http://t.co/NNKMLl9z9c… но пока времени на это нет совсем');
-    equal(timeline[1].text, 'Теперь на нашем сайте есть комментарии. Вы знаете, что делать! %) http://t.co/FqHKkzVzwS');
-    equal(timeline[2].text, '@iyntx проблема из-за корявого конвертора Epub &gt; PDF. Увы, лучшего не нашли. Если вы найдете — мы будем рады пулл-реквесту');
+it('should fetch all tweets in small account < 200 tweets', (done)=> {
+  const options = { screen_name: 'largescalejs_ru', trim_user: true, count: 200, include_rts: 1, exclude_replies: 0 };
+  getAllTweets(tokens, options).then((tweets)=> {
+    equal(tweets.list.length + tweets.missed, 37);
     done();
   });
 });
 
-it('should fetch all tweets', (done)=> {
-  const options = { screen_name: 'largescalejs_ru', trim_user: true, count: 5 };
+it('should fetch all 1601 tweets for @andrestaltz', (done)=> {
+  const options = { screen_name: 'andrestaltz', trim_user: true, count: 200, include_rts: 1, exclude_replies: 0 };
   getAllTweets(tokens, options).then((tweets)=> {
-    equal(tweets.length, 37);
-    equal(tweets[0].text, `@iyntx Я думаю поступить иначе http://t.co/NNKMLl9z9c… но пока времени на это нет совсем`);
-    equal(tweets[tweets.length - 1].text, `Ура! Мы перевели и вычитали первые 5 глав книги Эдди Османи! Добро пожаловать на http://t.co/mvgNd29i9C`);
+    equal(tweets.list.length + tweets.missed, 1601);
+    done();
+  });
+});
+
+it('should fetch all 1946 tweets for @Rygu', (done)=> {
+  const options = {
+    screen_name: 'Rygu',
+    trim_user: false,
+    count: 200,
+    include_rts: true,
+    exclude_replies: false,
+    contributor_details: true
+  };
+  getAllTweets(tokens, options).then((tweets)=> {
+    equal(tweets.list.length + tweets.missed, 1946);
+    equal(tweets.missed, 15);
+    done();
+  });
+});
+
+it('should fetch all 2397 tweets for @jsunderhood', (done)=> {
+  const options = { screen_name: 'jsunderhood', trim_user: true, count: 200, include_rts: 1, exclude_replies: 0 };
+  getAllTweets(tokens, options).then((tweets)=> {
+    equal(tweets.list.length + tweets.missed, 2397);
+    done();
+  });
+});
+
+it('should fetch all 758 tweets for @jhusain', (done)=> {
+  const options = { screen_name: 'jhusain', trim_user: true, count: 200, include_rts: 1, exclude_replies: 0 };
+  getAllTweets(tokens, options).then((tweets)=> {
+    equal(tweets.list.length + tweets.missed, 758);
     done();
   });
 });
