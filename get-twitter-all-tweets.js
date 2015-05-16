@@ -7,14 +7,8 @@ import getTimeline   from './get-twitter-timeline';
 import bignum        from 'bignum';
 
 const last = (arr)=> arr[arr.length - 1];
-const _options = {
-  trim_user: false,
-  count: 200,
-  include_rts: true,
-  exclude_replies: false
-};
 const getMaxId = (items)=> bignum(last(items).id_str).sub('1').toString(10);
-
+const _options = { trim_user: false, count: 200, include_rts: true, exclude_replies: false };
 
 export default(tokens, screen_name)=> {
   const options = Object.assign({screen_name}, _options);
