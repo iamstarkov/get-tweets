@@ -11,11 +11,12 @@ const _options = {
   include_rts: true,
   exclude_replies: false
 };
+const getMaxId = (items)=> bignum(last(items).id_str).sub('1').toString(10);
 
 
 export default(tokens, screen_name)=> {
   const options = Object.assign({screen_name}, _options);
-  
+
   var items = [];
   var missed = 0;
   return getInfo(tokens, options)
@@ -31,9 +32,7 @@ export default(tokens, screen_name)=> {
 
           console.log(`${items.length + missed}`);
           missed += options.count - timeline.length;
-          return getTimeline(tokens, Object.assign(options, {
-            max_id: bignum(last(items).id_str).sub('1').toString(10)
-          })).then(setTimeline);
+          return getTimeline(tokens, Object.assign(options, { max_id: getMaxId(items) })).then(setTimeline);
         };
 
         return getTimeline(tokens, options).then(setTimeline);
