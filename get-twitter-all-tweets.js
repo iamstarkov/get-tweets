@@ -16,7 +16,7 @@ const getMaxId = (items)=> bignum(last(items).id_str).sub('1').toString(10);
 
 export default(tokens, screen_name)=> {
   const options = Object.assign({screen_name}, _options);
-  var storage = { items: [], missed: 0, total: 0 };
+  var storage = { items: [], missed: 0 };
 
   return getInfo(tokens, options)
     .then((info)=> {
@@ -31,7 +31,6 @@ export default(tokens, screen_name)=> {
 
           console.log(`${storage.items.length + storage.missed}`);
           storage.missed += options.count - timeline.length;
-          storage.total = storage.items.length + storage.missed;
           return getTimeline(tokens, Object.assign(options, { max_id: getMaxId(storage.items) })).then(setTimeline);
         };
 
