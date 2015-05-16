@@ -16,15 +16,15 @@ export default(tokens, options)=> {
         const setTimeline = (timeline)=> {
           items = items.concat(timeline);
 
-          if (items.length + missed !== info.statuses_count) {
-            console.log(`${items.length + missed}`);
-            missed += options.count - timeline.length;
-            return getTimeline(tokens, Object.assign(options, {
-              max_id: bignum(last(items).id_str).sub('1').toString(10)
-            })).then(setTimeline);
+          if (items.length + missed === info.statuses_count) {
+            return resolved({ missed: missed, list: items });
           }
 
-          resolved({ missed: missed, list: items });
+          console.log(`${items.length + missed}`);
+          missed += options.count - timeline.length;
+          return getTimeline(tokens, Object.assign(options, {
+            max_id: bignum(last(items).id_str).sub('1').toString(10)
+          })).then(setTimeline);
         };
 
         return getTimeline(tokens, options).then(setTimeline);
