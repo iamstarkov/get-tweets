@@ -1,6 +1,8 @@
 import Promise from 'bluebird';
 import tokens        from './tokens.json';
-import getInfo       from './get-twitter-info';
+
+import api           from './api';
+
 import getTimeline   from './get-twitter-timeline';
 import bignum        from 'bignum';
 
@@ -18,7 +20,7 @@ export default(tokens, screen_name)=> {
   const options = Object.assign({screen_name}, _options);
   var storage = { items: [], missed: 0 };
 
-  return getInfo(tokens, options).then((info)=> {
+  return api.usersShow(tokens, options).then((info)=> {
     console.log(`## @${info.screen_name}, ${info.statuses_count}`);
     return new Promise((resolved, reject)=> {
       const setTimeline = (timeline)=> {
