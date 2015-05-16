@@ -1,7 +1,13 @@
 import { equal } from 'assert';
-import tokens    from './tokens.json';
 import api       from './api';
 import getTweets from './index';
+
+const tokens = {
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+};
 
 it('should fetch tweets count', (done)=> {
   api.usersShow(tokens, { screen_name: 'largescalejs_ru' }).then((info)=> {
