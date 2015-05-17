@@ -1,6 +1,6 @@
 {
   "name": "get-tweets",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Get all tweets for target username",
   "main": "index.es5.js",
   "scripts": {
