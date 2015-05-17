@@ -4,10 +4,10 @@
   "description": "Get all tweets for target username",
   "main": "es5",
   "scripts": {
-    "coverage": "istanbul cover _mocha -- --timeout 300000 --require babel/register",
+    "coverage": "istanbul cover _mocha -- --timeout 10000 --require babel/register",
     "precoveralls": "npm run coverage",
     "coveralls": "coveralls < coverage/lcov.info",
-    "test": "mocha --timeout 300000 --require babel/register",
+    "test": "mocha --timeout 10000 --require babel/register",
     "tdd": "npm test -- --watch",
     "transpile": "babel src --out-dir es5",
     "prepublish": "npm run transpile",
