@@ -2,16 +2,16 @@
   "name": "get-tweets",
   "version": "0.1.2",
   "description": "Get all tweets for target username",
-  "main": "index.es5.js",
+  "main": "es5",
   "scripts": {
     "coverage": "istanbul cover _mocha -- --timeout 300000 --require babel/register",
     "precoveralls": "npm run coverage",
     "coveralls": "coveralls < coverage/lcov.info",
     "test": "mocha --timeout 300000 --require babel/register",
     "tdd": "npm test -- --watch",
-    "transpile": "babel index.js > index.es5.js",
+    "transpile": "babel src --out-dir es5",
     "prepublish": "npm run transpile",
-    "postpublish": "rm *.es5.js && git push --follow-tags"
+    "postpublish": "rm -rf es5 && git push --follow-tags"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
   "dependencies": {
     "bignum": "^0.10.0",
     "bluebird": "^2.9.24",
+    "object-assign": "^2.0.0",
     "twitter": "^1.2.5"
   },
   "devDependencies": {
