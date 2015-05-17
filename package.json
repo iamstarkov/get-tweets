@@ -2,7 +2,7 @@
   "name": "get-tweets",
   "version": "0.1.1",
   "description": "Get all tweets for target username",
-  "main": "index.js",
+  "main": "index.es5.js",
   "scripts": {
     "coverage": "istanbul cover _mocha -- --timeout 300000 --require babel/register",
     "precoveralls": "npm run coverage",
