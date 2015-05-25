@@ -21,7 +21,7 @@ to adjust your permissions - most POST request require write permissions.
 [tokens]: https://apps.twitter.com/
 
 ```js
-var getTweets require('get-tweets');
+var getTweets = require('get-tweets');
 var tokens = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
