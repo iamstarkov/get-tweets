@@ -1,5 +1,5 @@
 import { equal, throws } from 'assert';
-import getTweets from './src/';
+import getTweets from './';
 
 const tokens = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
