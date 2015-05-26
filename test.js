@@ -1,5 +1,4 @@
-import { equal } from 'assert';
-import api       from './src/api';
+import { equal, throws } from 'assert';
 import getTweets from './src/';
 
 const tokens = {
@@ -9,45 +8,25 @@ const tokens = {
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 };
 
-it('should fetch tweets count', (done)=> {
-  api.usersShow(tokens, { screen_name: 'largescalejs_ru' }).then((info)=> {
-    equal(info.statuses_count, 37);
-    done();
-  });
-});
+const check = (done)=> (tweets, missed, info)=> {
+  equal(tweets.length + missed, info.statuses_count);
+  done();
+};
 
 it('should fetch all 37 tweets for @largescalejs_ru', (done)=> {
-  api.usersShow(tokens, { screen_name: 'largescalejs_ru' }).then((info)=> {
-    getTweets(tokens, 'largescalejs_ru').then((tweets)=> {
-      equal(tweets.items.length + tweets.missed, info.statuses_count);
-      done();
-    });
-  });
+  getTweets(tokens, 'largescalejs_ru', check(done));
 });
 
 it('should fetch all 1600+ tweets for @andrestaltz', (done)=> {
-  api.usersShow(tokens, { screen_name: 'andrestaltz' }).then((info)=> {
-    getTweets(tokens, 'andrestaltz').then((tweets)=> {
-      equal(tweets.items.length + tweets.missed, info.statuses_count);
-      done();
-    });
-  });
+  getTweets(tokens, 'andrestaltz', check(done));
 });
 
 it('should fetch all 1900+ tweets for @Rygu', (done)=> {
-  api.usersShow(tokens, { screen_name: 'Rygu' }).then((info)=> {
-    getTweets(tokens, 'Rygu').then((tweets)=> {
-      equal(tweets.items.length + tweets.missed, info.statuses_count);
-      done();
-    });
-  });
+  getTweets(tokens, 'Rygu', check(done));
 });
 
-it('should fetch all 2400+ tweets for @jsunderhood', (done)=> {
-  api.usersShow(tokens, { screen_name: 'jsunderhood' }).then((info)=> {
-    getTweets(tokens, 'jsunderhood').then((tweets)=> {
-      equal(tweets.items.length + tweets.missed, info.statuses_count);
-      done();
-    });
-  });
+it.skip('should throw an explanation error', ()=> {
+  throws(()=> {
+    getTweets(tokens, 'jsunderhood');
+  }, /@{screen_name} has over the 3200 tweets limit/);
 });
