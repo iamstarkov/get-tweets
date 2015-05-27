@@ -25,8 +25,9 @@ it('should fetch all 1900+ tweets for @Rygu', (done)=> {
   getTweets(tokens, 'Rygu', check(done));
 });
 
-it.skip('should throw an explanation error', ()=> {
-  throws(()=> {
-    getTweets(tokens, 'jsunderhood');
-  }, /@{screen_name} has over the 3200 tweets limit/);
+it('should return an error if account have a lot of tweets', (done)=> {
+  getTweets(tokens, 'jsunderhood', (err, res)=> {
+    equal(err.message, '@jsunderhood has over the 3200 tweets limit')
+    done();
+  });
 });
