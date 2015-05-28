@@ -35,11 +35,16 @@ var tokens = {
 get-tweets will try to fetch all tweets from the account and will return
 all tweets or error (if account have more than 3200 tweets).
 
-```js
-getTweets(tokens, 'andrestaltz', function(err, tweets) {
-  console.log(tweets);
-});
-```
+    getTweets(tokens, 'andrestaltz', function(err, tweets) {
+      console.log(tweets);
+    });
+
+### Get all tweets until target one (including)
+
+    getTweets(tokens, 'jsunderhood', '602825789478969344', function(err, tweets) {
+      console.log(tweets);
+    });
+
 
 ## License
 
