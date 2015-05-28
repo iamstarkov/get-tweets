@@ -31,3 +31,7 @@ it('should return an error if account have a lot of tweets', (done)=> {
     done();
   });
 });
+
+it.only('should fetch all 37 tweets for @largescalejs_ru', (done)=> {
+  getTweets(tokens, 'largescalejs_ru', 'SHA1-for-first-tweet', check(done));
+});
