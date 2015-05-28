@@ -2,4 +2,4 @@
 node_modules
 coverage
 npm-debug.log
-es5
+index.es5.js
