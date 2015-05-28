@@ -32,8 +32,8 @@ var tokens = {
 
 ## Get all tweets
 
-get-tweets will try to fetch all tweets from the account and will return it
-or error, if account have more than 3200 tweets.
+get-tweets will try to fetch all tweets from the account and will return
+all tweets or error (if account have more than 3200 tweets).
 
 ```js
 getTweets(tokens, 'andrestaltz', function(err, tweets) {
