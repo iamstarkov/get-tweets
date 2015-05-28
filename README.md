@@ -28,9 +28,16 @@ var tokens = {
   access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 };
+```
 
-getTweets(tokens, 'andrestaltz').then(function(res) {
-  console.log(res.items);
+## Get all tweets
+
+get-tweets will try to fetch all tweets from the account and will return it
+or error, if account have more than 3200 tweets.
+
+```js
+getTweets(tokens, 'andrestaltz', function(err, tweets) {
+  console.log(tweets);
 });
 ```
 
