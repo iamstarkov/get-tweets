@@ -11,7 +11,7 @@
     "tdd": "npm test -- --watch",
     "transpile": "babel index.js > index.es5.js",
     "prepublish": "npm run transpile",
-    "postpublish": "rm -rf es5 && git push --follow-tags"
+    "postpublish": "rm -rf index.es5.js && git push --follow-tags"
   },
   "repository": {
     "type": "git",
