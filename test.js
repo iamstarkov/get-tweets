@@ -8,7 +8,7 @@ const tokens = {
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 };
 
-const check = (done)=> (tweets, missed, info)=> {
+const check = (done)=> (err, tweets, missed, info)=> {
   equal(tweets.length + missed, info.statuses_count);
   done();
 };
@@ -32,6 +32,9 @@ it('should return an error if account have a lot of tweets', (done)=> {
   });
 });
 
-it.only('should fetch all 37 tweets for @largescalejs_ru', (done)=> {
-  getTweets(tokens, 'largescalejs_ru', 'SHA1-for-first-tweet', check(done));
+it('should return latest tweets incl lates one', (done)=> {
+  getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets)=> {
+    equal( '602825789478969344', tweets[tweets.length - 1].id_str);
+    done();
+  });
 });
