@@ -4,8 +4,7 @@ import assign   from 'object-assign';
 
 const last = (arr)=> arr[arr.length - 1];
 const getMaxId = (items)=> bignum(last(items).id_str).sub('1').toString(10);
-// TODO: setup options to not include account info into every tweet
-const _options = { trim_user: false, count: 200, include_rts: true, exclude_replies: false };
+const _options = { trim_user: true, count: 200, include_rts: true, exclude_replies: false };
 
 const setTimeline = (client, resolve, info, items, missed, options, timeline)=> {
   items = items.concat(timeline);
