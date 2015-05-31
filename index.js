@@ -15,7 +15,7 @@ const setTimeline = (client, resolve, target, info, items, missed, options, time
 
   if (target && items.find(i => i.id_str === target)) {
     const number = items.findIndex(i => i.id_str === target) + 1;
-    return resolve(undefined, items.splice(0, number));
+    return resolve(undefined, items.splice(0, number), missed, info);
   }
 
   if (target && (items.length + missed > 3200)) {
