@@ -39,7 +39,7 @@ all tweets or error (if account have more than 3200 tweets).
       console.log(tweets);
     });
 
-### Get all tweets until target one (including)
+### Get latest tweets including target one
 
     getTweets(tokens, 'jsunderhood', '602825789478969344', function(err, tweets) {
       console.log(tweets);
