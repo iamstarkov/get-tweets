@@ -13,19 +13,19 @@ const check = (done)=> (err, tweets, missed, info)=> {
   done();
 };
 
-it('should fetch all 37 tweets for @largescalejs_ru', (done)=> {
+it('all: should fetch all 37 tweets for @largescalejs_ru', (done)=> {
   getTweets(tokens, 'largescalejs_ru', check(done));
 });
 
-it('should fetch all 1600+ tweets for @andrestaltz', (done)=> {
+it('all: should fetch all 1600+ tweets for @andrestaltz', (done)=> {
   getTweets(tokens, 'andrestaltz', check(done));
 });
 
-it('should fetch all 1900+ tweets for @Rygu', (done)=> {
+it('all: should fetch all 1900+ tweets for @Rygu', (done)=> {
   getTweets(tokens, 'Rygu', check(done));
 });
 
-it('should return an error if account have a lot of tweets', (done)=> {
+it('all: should return an error if account have a lot of tweets', (done)=> {
   getTweets(tokens, 'jsunderhood', (err, res)=> {
     equal(err.message, '@jsunderhood has over the 3200 tweets limit')
     done();
