@@ -32,9 +32,16 @@ it('should return an error if account have a lot of tweets', (done)=> {
   });
 });
 
-it('should return latest tweets incl lates one', (done)=> {
+it('latest: should return latest tweets incl target one', (done)=> {
   getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets)=> {
-    equal( '602825789478969344', tweets[tweets.length - 1].id_str);
+    equal('602825789478969344', tweets[tweets.length - 1].id_str);
+    done();
+  });
+});
+
+it('latest: should return error if target tweet is too far a way', (done)=> {
+  getTweets(tokens, 'jsunderhood', '562519903249649665', (err)=> {
+    equal(err.message, 'Target tweet is too far a way');
     done();
   });
 });
