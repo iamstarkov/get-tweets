@@ -37,13 +37,14 @@ export default(tokens, screen_name, ...args)=> {
   const options = assign({screen_name}, _options);
 
   client.get('/users/show.json', options, (err, info, raw)=> {
-    if (err) return resolve(err);
+    if (err) throw err;
 
     if (!target && (info.statuses_count > 3200)) {
       return resolve(new Error(`@${screen_name} has over the 3200 tweets limit`));
     }
 
     client.get('/statuses/user_timeline.json', options, (err, res, raw)=> {
+      if (err) throw err;
       setTimeline(client, resolve, target, info, [], 0, options, res);
     });
   });
