@@ -25,7 +25,7 @@ const setTimeline = (client, resolve, target, info, items, missed, options, time
   missed += options.count - timeline.length;
 
   client.get('/statuses/user_timeline.json', assign({}, options, { max_id: getMaxId(items) }), (err, res, raw)=> {
-    if (err) return resolve(err);
+    if (err) throw err;
     setTimeline(client, resolve, target, info, items, missed, options, res);
   });
 };
