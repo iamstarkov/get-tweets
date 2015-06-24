@@ -51,16 +51,16 @@ all tweets or error (if account have more than 3200 tweets).
 MIT © [Vladimir Starkov](https://iamstarkov.com/)
 
 [npm-url]: https://npmjs.org/package/get-tweets
-[npm-image]: https://img.shields.io/npm/v/get-tweets.svg
+[npm-image]: https://img.shields.io/npm/v/get-tweets.svg?style=flat-square
 
 [travis-url]: https://travis-ci.org/iamstarkov/get-tweets
-[travis-image]: https://img.shields.io/travis/iamstarkov/get-tweets.svg
+[travis-image]: https://img.shields.io/travis/iamstarkov/get-tweets.svg?style=flat-square
 
 [coveralls-url]: https://coveralls.io/r/iamstarkov/get-tweets
-[coveralls-image]: https://img.shields.io/coveralls/iamstarkov/get-tweets.svg
+[coveralls-image]: https://img.shields.io/coveralls/iamstarkov/get-tweets.svg?style=flat-square
 
 [depstat-url]: https://david-dm.org/iamstarkov/get-tweets
-[depstat-image]: https://david-dm.org/iamstarkov/get-tweets.svg
+[depstat-image]: https://img.shields.io/david/iamstarkov/get-tweets.svg?style=flat-square
 
 [depstat-dev-url]: https://david-dm.org/iamstarkov/get-tweets
-[depstat-dev-image]: https://david-dm.org/iamstarkov/get-tweets/dev-status.svg
+[depstat-dev-image]: https://img.shields.io/david/dev/iamstarkov/get-tweets.svg?style=flat-square
