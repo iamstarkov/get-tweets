@@ -25,7 +25,7 @@ const setTimeline = (client, resolve, target, info, items, missed, options, time
   missed += options.count - timeline.length;
 
   client.get('/statuses/user_timeline.json', assign({}, options, { max_id: getMaxId(items) }), (err, res, raw)=> {
-    if (err) throw err;
+    if (err) throw new Error(`Code ${err[0].code}. ${err[0].message}`);
     setTimeline(client, resolve, target, info, items, missed, options, res);
   });
 };
@@ -37,14 +37,14 @@ export default(tokens, screen_name, ...args)=> {
   const options = assign({screen_name}, _options);
 
   client.get('/users/show.json', options, (err, info, raw)=> {
-    if (err) throw err;
+    if (err) throw new Error(`Code ${err[0].code}. ${err[0].message}`);
 
     if (!target && (info.statuses_count > 3200)) {
       return resolve(new Error(`@${screen_name} has over the 3200 tweets limit`));
     }
 
     client.get('/statuses/user_timeline.json', options, (err, res, raw)=> {
-      if (err) throw err;
+      if (err) throw new Error(`Code ${err[0].code}. ${err[0].message}`);
       setTimeline(client, resolve, target, info, [], 0, options, res);
     });
   });
