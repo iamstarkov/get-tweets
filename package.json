@@ -38,6 +38,7 @@
     "babel": "^5.1.13",
     "coveralls": "^2.11.2",
     "istanbul": "^0.3.14",
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.4",
+    "twitter-tokens": "^1.0.0"
   }
 }

@@ -1,12 +1,6 @@
 import { equal } from 'assert';
 import getTweets from './';
-
-const tokens = {
-  consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
-};
+import tokens from 'twitter-tokens';
 
 const check = (done)=> (err, tweets, missed, info)=> {
   equal(tweets.length + missed, info.statuses_count);
@@ -33,8 +27,8 @@ it('all: should return an error if account have a lot of tweets', (done)=> {
 });
 
 it('latest: should return latest tweets incl target one', (done)=> {
-  getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets)=> {
-    equal('602825789478969344', tweets[tweets.length - 1].id_str);
+  getTweets(tokens, 'largescaleJS_ru', '424196654758375425', (err, tweets)=> {
+    equal('424196654758375425', tweets[tweets.length - 1].id_str);
     done();
   });
 });
