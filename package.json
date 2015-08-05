@@ -32,13 +32,13 @@
   "dependencies": {
     "bignum": "^0.10.1",
     "object-assign": "^3.0.0",
-    "twitter": "^1.2.5",
-    "twitter-tokens": "^1.0.0"
+    "twitter": "^1.2.5"
   },
   "devDependencies": {
     "babel": "*",
     "coveralls": "*",
     "isparta": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "twitter-tokens": "*"
   }
 }
