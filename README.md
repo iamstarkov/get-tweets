@@ -4,7 +4,6 @@
 [![Build Status][travis-image]][travis-url]
 [![Coveralls Status][coveralls-image]][coveralls-url]
 [![Dependency Status][depstat-image]][depstat-url]
-[![DevDependency Status][depstat-dev-image]][depstat-dev-url]
 
 > Get all tweets for target username
 
@@ -14,37 +13,33 @@
 
 ## Usage
 
-You will need valid [Twitter developer credentials (tokens)][tokens]
-in the form of a set of consumer and access tokens/keys. Do not forgot
-to adjust your permissions - most POST request require write permissions.
+You will need valid [Twitter developer credentials (tokens)][creds]
+in the form of a set of consumer and access tokens/keys.
+You can use [twitter-tokens][tokens], to simplify getting tokens
 
-[tokens]: https://apps.twitter.com/
+[creds]: https://apps.twitter.com/
+[tokens]: https://www.npmjs.com/package/twitter-tokens
 
 ```js
-var getTweets = require('get-tweets');
-var tokens = {
-  consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
-};
+import getTweets from 'get-tweets';
+import tokens from 'twitter-tokens';
+
+/**
+ * ### Get all tweets
+ * get-tweets will try to fetch all tweets from the account and will return
+ * all tweets or error (if account have more than 3200 tweets).
+ */
+getTweets(tokens, 'andrestaltz', (err, tweets) => {
+  console.log(tweets);
+});
+
+/**
+ * ### Get latest tweets including target one
+ */
+getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets) => {
+  console.log(tweets);
+});
 ```
-
-## Get all tweets
-
-get-tweets will try to fetch all tweets from the account and will return
-all tweets or error (if account have more than 3200 tweets).
-
-    getTweets(tokens, 'andrestaltz', function(err, tweets) {
-      console.log(tweets);
-    });
-
-### Get latest tweets including target one
-
-    getTweets(tokens, 'jsunderhood', '602825789478969344', function(err, tweets) {
-      console.log(tweets);
-    });
-
 
 ## License
 
@@ -61,6 +56,3 @@ MIT © [Vladimir Starkov](https://iamstarkov.com/)
 
 [depstat-url]: https://david-dm.org/iamstarkov/get-tweets
 [depstat-image]: https://img.shields.io/david/iamstarkov/get-tweets.svg?style=flat-square
-
-[depstat-dev-url]: https://david-dm.org/iamstarkov/get-tweets
-[depstat-dev-image]: https://img.shields.io/david/dev/iamstarkov/get-tweets.svg?style=flat-square

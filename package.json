@@ -4,7 +4,7 @@
   "description": "Get all tweets for target username",
   "main": "index.es5.js",
   "scripts": {
-    "coverage": "istanbul cover _mocha -- --timeout 1000000 --require babel/register",
+    "coverage": "isparta cover _mocha -- --timeout 1000000 --require babel/register",
     "precoveralls": "npm run coverage",
     "coveralls": "coveralls < coverage/lcov.info",
     "test": "mocha --timeout 1000000 --require babel/register",
@@ -32,13 +32,13 @@
   "dependencies": {
     "bignum": "^0.10.1",
     "object-assign": "^3.0.0",
-    "twitter": "^1.2.5"
+    "twitter": "^1.2.5",
+    "twitter-tokens": "^1.0.0"
   },
   "devDependencies": {
-    "babel": "^5.1.13",
-    "coveralls": "^2.11.2",
-    "istanbul": "^0.3.14",
-    "mocha": "^2.2.4",
-    "twitter-tokens": "^1.0.0"
+    "babel": "*",
+    "coveralls": "*",
+    "isparta": "*",
+    "mocha": "*"
   }
 }
