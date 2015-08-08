@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- iojs-2
+- iojs
 after_script:
 - npm run coveralls
 env:
