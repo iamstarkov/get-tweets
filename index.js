@@ -1,9 +1,9 @@
 import Twitter  from 'twitter';
-import bignum   from 'bignum';
+import bignum   from 'bn.js';
 import assign   from 'object-assign';
 
 const last = (arr)=> arr[arr.length - 1];
-const getMaxId = (items)=> bignum(last(items).id_str).sub('1').toString(10);
+const getMaxId = (items)=> (new bignum(last(items).id_str).sub(new bignum('1'))).toString();
 const _options = { trim_user: true, count: 200, include_rts: true, exclude_replies: false };
 
 const setTimeline = (client, resolve, target, info, items, missed, options, timeline)=> {
