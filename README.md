@@ -13,13 +13,6 @@
 
 ## Usage
 
-You will need valid [Twitter developer credentials (tokens)][creds]
-in the form of a set of consumer and access tokens/keys.
-You can use [twitter-tokens][tokens], to simplify getting tokens.
-
-[creds]: https://apps.twitter.com/
-[tokens]: https://www.npmjs.com/package/twitter-tokens
-
 ```js
 import getTweets from 'get-tweets';
 import tokens from 'twitter-tokens';
@@ -28,6 +21,44 @@ getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets) => {
   console.log(tweets);
 });
 ```
+
+## API
+
+### getTweets(tokens, username, target, cb)
+
+#### tokens
+
+*Required*  
+Type: `Object`
+
+Valid [Twitter developer credentials (tokens)][creds]
+in the form of a set of consumer and access tokens/keys.
+You can use [twitter-tokens][tokens], to simplify getting tokens.
+
+[creds]: https://apps.twitter.com/
+[tokens]: https://www.npmjs.com/package/twitter-tokens
+
+#### username
+
+*Required*  
+Type: `String`
+
+Twitter username.
+
+#### target
+
+*Required*  
+Type: `String`
+
+Target tweet which, will indicate that you get enough latest tweets.
+This tweet will be included into response.
+
+#### cb(err, tweets)
+
+*Required*  
+Type: `Function`
+
+Callback for you.
 
 ## License
 
