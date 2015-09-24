@@ -5,7 +5,7 @@ import tokens from 'twitter-tokens';
 
 it('should return an error if target tweet is too far a way', (done) => {
   getTweets(tokens, 'jsunderhood', '562972738303037442', (err, res) => {
-    equal(err.message, 'Target tweet is too far a way')
+    equal(err.message, 'Target tweet is too far away')
     done();
   });
 });
