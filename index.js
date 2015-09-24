@@ -36,9 +36,9 @@ function accumulate(get, options, target, tweets, cb) {
   });
 }
 
-export default function getTweets(tokens, screen_name, target, cb) {
+export default function getTweets(tokens, username, target, cb) {
   const client = new Twitter(tokens);
   const get = client.get.bind(client, '/statuses/user_timeline.json');
-  const optionsWithScreenName = assign({}, { screen_name }, options)
+  const optionsWithScreenName = assign({}, { screen_name: username }, options);
   return accumulate(get, optionsWithScreenName, target, [], cb);
 };
