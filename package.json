@@ -32,6 +32,7 @@
   "dependencies": {
     "bn.js": "^3.1.2",
     "object-assign": "^4.0.1",
+    "ramda": "^0.17.1",
     "twitter": "^1.2.5"
   },
   "devDependencies": {
