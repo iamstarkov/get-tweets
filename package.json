@@ -1,7 +1,7 @@
 {
   "name": "get-tweets",
   "version": "1.1.9",
-  "description": "Get all tweets for target username",
+  "description": "Get latest tweets for target username",
   "main": "index.es5.js",
   "scripts": {
     "coverage": "isparta cover _mocha index.js -- --timeout 1000000 --require babel/register",

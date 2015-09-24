@@ -5,7 +5,7 @@
 [![Coveralls Status][coveralls-image]][coveralls-url]
 [![Dependency Status][depstat-image]][depstat-url]
 
-> Get all tweets for target username
+> Get latest tweets for target username
 
 ## Install
 
@@ -15,7 +15,7 @@
 
 You will need valid [Twitter developer credentials (tokens)][creds]
 in the form of a set of consumer and access tokens/keys.
-You can use [twitter-tokens][tokens], to simplify getting tokens
+You can use [twitter-tokens][tokens], to simplify getting tokens.
 
 [creds]: https://apps.twitter.com/
 [tokens]: https://www.npmjs.com/package/twitter-tokens
@@ -24,18 +24,6 @@ You can use [twitter-tokens][tokens], to simplify getting tokens
 import getTweets from 'get-tweets';
 import tokens from 'twitter-tokens';
 
-/**
- * ### Get all tweets
- * get-tweets will try to fetch all tweets from the account and will return
- * all tweets or error (if account have more than 3200 tweets).
- */
-getTweets(tokens, 'andrestaltz', (err, tweets) => {
-  console.log(tweets);
-});
-
-/**
- * ### Get latest tweets including target one
- */
 getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets) => {
   console.log(tweets);
 });
