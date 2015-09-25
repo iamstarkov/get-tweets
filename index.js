@@ -32,7 +32,7 @@ function accumulate(get, options, target, tweets, cb) {
     if (findTargetIndex(accumulatedTweets) !== -1) {
       return cb(null, slice(0, findTargetIndex(accumulatedTweets) + 1, accumulatedTweets));
     }
-    return accumulate(get, options, target, accumulatedTweets, cb);
+    return accumulate(get, nextTweetsOptions, target, accumulatedTweets, cb);
   });
 }
 
