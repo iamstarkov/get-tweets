@@ -1,7 +1,7 @@
 {
   "name": "get-tweets",
   "version": "1.1.9",
-  "description": "Get all tweets for target username",
+  "description": "Get latest tweets",
   "main": "index.es5.js",
   "scripts": {
     "coverage": "isparta cover _mocha index.js -- --timeout 1000000 --require babel/register",
@@ -32,6 +32,7 @@
   "dependencies": {
     "bn.js": "^3.1.2",
     "object-assign": "^4.0.1",
+    "ramda": "^0.17.1",
     "twitter": "^1.2.5"
   },
   "devDependencies": {

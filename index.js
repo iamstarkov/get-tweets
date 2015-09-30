@@ -1,51 +1,44 @@
-import Twitter  from 'twitter';
-import bignum   from 'bn.js';
-import assign   from 'object-assign';
+import Twitter from 'twitter';
+import assign  from 'object-assign';
+import bignum  from 'bn.js';
+import { last, concat, propEq, slice, findIndex, isEmpty } from 'ramda';
 
-const last = (arr)=> arr[arr.length - 1];
-const getMaxId = (items)=> (new bignum(last(items).id_str).sub(new bignum('1'))).toString();
-const _options = { trim_user: true, count: 200, include_rts: true, exclude_replies: false };
-
-const setTimeline = (client, resolve, target, info, items, missed, options, timeline)=> {
-  items = items.concat(timeline);
-
-  if (!target && (items.length + missed === info.statuses_count)) {
-    return resolve(undefined, items, missed, info);
-  }
-
-  if (target && items.find(i => i.id_str === target)) {
-    const number = items.findIndex(i => i.id_str === target) + 1;
-    return resolve(undefined, items.splice(0, number), missed, info);
-  }
-
-  if (target && (items.length + missed > 3200)) {
-    return resolve(new Error(`Target tweet is too far a way`));
-  }
-
-  missed += options.count - timeline.length;
-
-  client.get('/statuses/user_timeline.json', assign({}, options, { max_id: getMaxId(items) }), (err, res, raw)=> {
-    if (err) throw new Error(`Code ${err[0].code}. ${err[0].message}`);
-    setTimeline(client, resolve, target, info, items, missed, options, res);
-  });
+const options = {
+  trim_user: true,
+  count: 200,
+  include_rts: true,
+  exclude_replies: false
 };
 
-export default(tokens, screen_name, ...args)=> {
-  const resolve = last(args);
-  const target = (args.length === 2) && args[0];
-  const client = new Twitter(tokens);
-  const options = assign({screen_name}, _options);
+function bignumDec(i) {
+  return (new bignum(i).sub(new bignum('1'))).toString();
+}
 
-  client.get('/users/show.json', options, (err, info, raw)=> {
-    if (err) throw new Error(`Code ${err[0].code}. ${err[0].message}`);
+function getNextTweetsOptions(options, tweets) {
+  if (isEmpty(tweets)) return options;
+  return assign({}, options, { max_id: bignumDec(last(tweets).id_str) });
+}
 
-    if (!target && (info.statuses_count > 3200)) {
-      return resolve(new Error(`@${screen_name} has over the 3200 tweets limit`));
+function accumulate(get, options, lastTweetToGet, tweets, cb) {
+  const isTarget = propEq('id_str', lastTweetToGet);
+  const findTargetIndex = findIndex(isTarget);
+  const nextTweetsOptions = getNextTweetsOptions(options, tweets);
+  get(nextTweetsOptions, (err, res) => {
+    if (err) throw new err;
+    if (isEmpty(res)) {
+      return cb(new Error('Target tweet is too far away'));
     }
-
-    client.get('/statuses/user_timeline.json', options, (err, res, raw)=> {
-      if (err) throw new Error(`Code ${err[0].code}. ${err[0].message}`);
-      setTimeline(client, resolve, target, info, [], 0, options, res);
-    });
+    const accumulatedTweets = concat(tweets, res);
+    if (findTargetIndex(accumulatedTweets) !== -1) {
+      return cb(null, slice(0, findTargetIndex(accumulatedTweets) + 1, accumulatedTweets));
+    }
+    return accumulate(get, nextTweetsOptions, lastTweetToGet, accumulatedTweets, cb);
   });
+}
+
+export default function getTweets(tokens, username, lastTweetToGet, cb) {
+  const client = new Twitter(tokens);
+  const get = client.get.bind(client, '/statuses/user_timeline.json');
+  const optionsWithScreenName = assign({}, { screen_name: username }, options);
+  return accumulate(get, optionsWithScreenName, lastTweetToGet, [], cb);
 };
