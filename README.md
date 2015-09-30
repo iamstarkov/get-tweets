@@ -24,7 +24,7 @@ getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets) => {
 
 ## API
 
-### getTweets(tokens, username, target, cb)
+### getTweets(tokens, username, lastTweetToGet, cb)
 
 #### tokens
 
@@ -45,13 +45,12 @@ Type: `String`
 
 Twitter username.
 
-#### target
+#### lastTweetToGet
 
 *Required*  
 Type: `String`
 
-Target tweet which, will indicate that you get enough latest tweets.
-This tweet will be included into response.
+ID of the last tweet to get
 
 #### cb(err, tweets)
 

@@ -19,8 +19,8 @@ function getNextTweetsOptions(options, tweets) {
   return assign({}, options, { max_id: bignumDec(last(tweets).id_str) });
 }
 
-function accumulate(get, options, target, tweets, cb) {
-  const isTarget = propEq('id_str', target);
+function accumulate(get, options, lastTweetToGet, tweets, cb) {
+  const isTarget = propEq('id_str', lastTweetToGet);
   const findTargetIndex = findIndex(isTarget);
   const nextTweetsOptions = getNextTweetsOptions(options, tweets);
   get(nextTweetsOptions, (err, res) => {
@@ -32,13 +32,13 @@ function accumulate(get, options, target, tweets, cb) {
     if (findTargetIndex(accumulatedTweets) !== -1) {
       return cb(null, slice(0, findTargetIndex(accumulatedTweets) + 1, accumulatedTweets));
     }
-    return accumulate(get, nextTweetsOptions, target, accumulatedTweets, cb);
+    return accumulate(get, nextTweetsOptions, lastTweetToGet, accumulatedTweets, cb);
   });
 }
 
-export default function getTweets(tokens, username, target, cb) {
+export default function getTweets(tokens, username, lastTweetToGet, cb) {
   const client = new Twitter(tokens);
   const get = client.get.bind(client, '/statuses/user_timeline.json');
   const optionsWithScreenName = assign({}, { screen_name: username }, options);
-  return accumulate(get, optionsWithScreenName, target, [], cb);
+  return accumulate(get, optionsWithScreenName, lastTweetToGet, [], cb);
 };
