@@ -31,11 +31,11 @@ getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets) => {
 *Required*  
 Type: `Object`
 
-Valid [Twitter developer credentials (tokens)][creds]
+Valid [Twitter developer credentials (tokens)][how-to-get]
 in the form of a set of consumer and access tokens/keys.
 You can use [twitter-tokens][tokens], to simplify getting tokens.
 
-[creds]: https://apps.twitter.com/
+[how-to-get]: https://iamstarkov.com/get-twitter-tokens/
 [tokens]: https://www.npmjs.com/package/twitter-tokens
 
 #### username
