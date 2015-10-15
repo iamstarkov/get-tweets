@@ -1,4 +1,4 @@
-import Twitter from 'twitter';
+import Twitter from 'twit';
 import assign  from 'object-assign';
 import bignum  from 'bn.js';
 import { last, concat, propEq, slice, findIndex, isEmpty } from 'ramda';
@@ -38,7 +38,7 @@ function accumulate(get, options, lastTweetToGet, tweets, cb) {
 
 export default function getTweets(tokens, username, lastTweetToGet, cb) {
   const client = new Twitter(tokens);
-  const get = client.get.bind(client, '/statuses/user_timeline.json');
+  const get = client.get.bind(client, 'statuses/user_timeline');
   const optionsWithScreenName = assign({}, { screen_name: username }, options);
   return accumulate(get, optionsWithScreenName, lastTweetToGet, [], cb);
 };

@@ -12,6 +12,7 @@ it('should return an error if target tweet is too far a way', (done) => {
 
 it('latest: should return latest tweets incl target one', (done) => {
   getTweets(tokens, 'largescalejs_ru', '424196654758375425', (err, res) => {
+    if (err) throw err;
     equal('424196654758375425', last(res).id_str);
     done();
   });
