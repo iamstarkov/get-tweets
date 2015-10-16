@@ -18,6 +18,7 @@ import getTweets from 'get-tweets';
 import tokens from 'twitter-tokens';
 
 getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets) => {
+  if (err) throw err;
   console.log(tweets);
 });
 ```

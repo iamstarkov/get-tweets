@@ -24,7 +24,7 @@ function accumulate(get, options, lastTweetToGet, tweets, cb) {
   const findTargetIndex = findIndex(isTarget);
   const nextTweetsOptions = getNextTweetsOptions(options, tweets);
   get(nextTweetsOptions, (err, res) => {
-    if (err) throw err;
+    if (err) return cb(err);
     if (isEmpty(res)) {
       return cb(new Error('Target tweet is too far away'));
     }
