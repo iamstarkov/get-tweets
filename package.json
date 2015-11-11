@@ -1,6 +1,6 @@
 {
   "name": "get-tweets",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Get latest tweets",
   "main": "index.es5.js",
   "scripts": {
