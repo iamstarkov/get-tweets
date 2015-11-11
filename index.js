@@ -1,6 +1,6 @@
 import Twitter from 'twit';
 import assign  from 'object-assign';
-import bignum  from 'bn.js';
+import dec from 'bignum-dec';
 import { last, concat, propEq, slice, findIndex, isEmpty } from 'ramda';
 
 const options = {
@@ -10,13 +10,9 @@ const options = {
   exclude_replies: false
 };
 
-function bignumDec(i) {
-  return (new bignum(i).sub(new bignum('1'))).toString();
-}
-
 function getNextTweetsOptions(options, tweets) {
   if (isEmpty(tweets)) return options;
-  return assign({}, options, { max_id: bignumDec(last(tweets).id_str) });
+  return assign({}, options, { max_id: dec(last(tweets).id_str) });
 }
 
 function accumulate(get, options, lastTweetToGet, tweets, cb) {

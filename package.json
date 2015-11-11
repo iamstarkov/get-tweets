@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/iamstarkov/get-tweets#readme",
   "dependencies": {
-    "bn.js": "^3.1.2",
+    "bignum-dec": "^1.0.0",
     "object-assign": "^4.0.1",
     "ramda": "^0.18.0",
     "twit": "^2.1.0"
