@@ -17,7 +17,7 @@
 import getTweets from 'get-tweets';
 import tokens from 'twitter-tokens';
 
-getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets) => {
+getTweets(tokens, 'largescalejs_ru', '424119506508980224', (err, tweets) => {
   if (err) throw err;
   console.log(tweets);
 });
@@ -25,7 +25,7 @@ getTweets(tokens, 'jsunderhood', '602825789478969344', (err, tweets) => {
 
 ## API
 
-### getTweets(tokens, username, lastTweetToGet, cb)
+### getTweets(tokens, username, sinceId, cb)
 
 #### tokens
 
@@ -46,12 +46,19 @@ Type: `String`
 
 Twitter username.
 
-#### lastTweetToGet
+#### sinceId
 
 *Required*  
 Type: `String`
 
-ID of the last tweet to get
+`id_str` of tweet since which you want to get latest tweets. Result array will not contain this tweet. If you want it to contain that tweet use _[bignum-dec][dec]_: `getMentions(tokens, bignumDec(tweet.id_str), cb);`. See [tests][tests] for details.
+
+> Return results with an ID greater than (that is, more recent than) the specified ID. There are limits to the number of Tweets which can be accessed through the API. If the limit of Tweets has occured since the `since_id`, the `since_id` will be forced to the oldest ID available.  
+> — [Twitter API `statuses/user_timeline`][user_timeline]
+
+[tests]: https://github.com/iamstarkov/get-tweets/blob/master/test.js
+[dec]: https://github.com/iamstarkov/bignum-dec
+[user_timeline]: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
 
 #### cb(err, tweets)
 

@@ -2,18 +2,21 @@ import { equal } from 'assert';
 import { last } from 'ramda';
 import getTweets from './index';
 import tokens from 'twitter-tokens';
+import dec from 'bignum-dec';
 
-it('should return an error if target tweet is too far a way', (done) => {
-  getTweets(tokens, 'jsunderhood', '562972738303037442', (err, res) => {
-    equal(err.message, 'Target tweet is too far away')
+it('getTweets', done => {
+  getTweets(tokens, 'largescalejs_ru', '424119506508980224', (err, res) => {
+    if (err) throw err;
+    equal(res.length, 36);
     done();
   });
 });
 
-it('latest: should return latest tweets incl target one', (done) => {
-  getTweets(tokens, 'largescalejs_ru', '424196654758375425', (err, res) => {
+it('getTweets including since_id', done => {
+  getTweets(tokens, 'largescalejs_ru', dec('424119506508980224'), (err, res) => {
     if (err) throw err;
-    equal('424196654758375425', last(res).id_str);
+    equal(res.length, 37);
+    equal(last(res).id_str, '424119506508980224');
     done();
   });
 });

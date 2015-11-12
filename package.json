@@ -39,6 +39,7 @@
     "babel-cli": "^6.1.2",
     "babel-core": "^6.1.2",
     "babel-preset-es2015": "^6.1.2",
+    "bignum-dec": "^1.0.1",
     "coveralls": "*",
     "isparta": "*",
     "mocha": "*",

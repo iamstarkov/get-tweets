@@ -1,40 +1,33 @@
 import Twitter from 'twit';
-import assign  from 'object-assign';
 import dec from 'bignum-dec';
-import { last, concat, propEq, slice, findIndex, isEmpty } from 'ramda';
+import { merge, pipe, prop, last, concat, isEmpty } from 'ramda';
 
-const options = {
-  trim_user: true,
+const defaults = {
   count: 200,
+  trim_user: true,
   include_rts: true,
-  exclude_replies: false
+  exclude_replies: false,
 };
 
-function getNextTweetsOptions(options, tweets) {
-  if (isEmpty(tweets)) return options;
-  return assign({}, options, { max_id: dec(last(tweets).id_str) });
-}
+const getNextOptions = (options, tweets) =>
+  (isEmpty(tweets))
+    ? options
+    : merge(options, { max_id: pipe(last, prop('id_str'), dec)(tweets) });
 
-function accumulate(get, options, lastTweetToGet, tweets, cb) {
-  const isTarget = propEq('id_str', lastTweetToGet);
-  const findTargetIndex = findIndex(isTarget);
-  const nextTweetsOptions = getNextTweetsOptions(options, tweets);
-  get(nextTweetsOptions, (err, res) => {
+function accumulate(get, options, tweets, cb) {
+  const nextOptions = getNextOptions(options, tweets);
+  get(nextOptions, (err, res) => {
     if (err) return cb(err);
-    if (isEmpty(res)) {
-      return cb(new Error('Target tweet is too far away'));
-    }
     const accumulatedTweets = concat(tweets, res);
-    if (findTargetIndex(accumulatedTweets) !== -1) {
-      return cb(null, slice(0, findTargetIndex(accumulatedTweets) + 1, accumulatedTweets));
-    }
-    return accumulate(get, nextTweetsOptions, lastTweetToGet, accumulatedTweets, cb);
+    return (isEmpty(res))
+      ? cb(null, accumulatedTweets)
+      : accumulate(get, nextOptions, accumulatedTweets, cb);
   });
 }
 
-export default function getTweets(tokens, username, lastTweetToGet, cb) {
+export default function getTweets(tokens, username, sinceId, cb) {
   const client = new Twitter(tokens);
   const get = client.get.bind(client, 'statuses/user_timeline');
-  const optionsWithScreenName = assign({}, { screen_name: username }, options);
-  return accumulate(get, optionsWithScreenName, lastTweetToGet, [], cb);
+  const options = merge(defaults, { screen_name: username, since_id: sinceId });
+  return accumulate(get, options, [], cb);
 };
