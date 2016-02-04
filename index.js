@@ -14,20 +14,19 @@ const getNextOptions = (options, tweets) =>
     ? options
     : merge(options, { max_id: pipe(last, prop('id_str'), dec)(tweets) });
 
-function accumulate(get, options, tweets, cb) {
+function accumulate(get, options, tweets) {
   const nextOptions = getNextOptions(options, tweets);
-  get(nextOptions, (err, res) => {
-    if (err) return cb(err);
+  return get(nextOptions).then(res => {
     const accumulatedTweets = concat(tweets, res);
     return (isEmpty(res))
-      ? cb(null, accumulatedTweets)
-      : accumulate(get, nextOptions, accumulatedTweets, cb);
+      ? accumulatedTweets
+      : accumulate(get, nextOptions, accumulatedTweets);
   });
 }
 
-export default function getTweets(tokens, username, sinceId, cb) {
+export default function getTweets(tokens, username, sinceId) {
   const client = new Twitter(tokens);
   const get = client.get.bind(client, 'statuses/user_timeline');
   const options = merge(defaults, { screen_name: username, since_id: sinceId });
-  return accumulate(get, options, [], cb);
+  return accumulate(get, options, []);
 };
