@@ -17,15 +17,16 @@
 import getTweets from 'get-tweets';
 import tokens from 'twitter-tokens';
 
-getTweets(tokens, 'largescalejs_ru', '424119506508980224', (err, tweets) => {
-  if (err) throw err;
+getTweets(tokens, 'largescalejs_ru', '424119506508980224').then(tweets => {
   console.log(tweets);
 });
 ```
 
 ## API
 
-### getTweets(tokens, username, sinceId, cb)
+### getTweets(tokens, username, sinceId)
+
+Return a promise that resolves to tweets.
 
 #### tokens
 
@@ -59,13 +60,6 @@ Type: `String`
 [tests]: https://github.com/iamstarkov/get-tweets/blob/master/test.js
 [dec]: https://github.com/iamstarkov/bignum-dec
 [user_timeline]: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
-
-#### cb(err, tweets)
-
-*Required*  
-Type: `Function`
-
-Callback for you.
 
 ## License
 
