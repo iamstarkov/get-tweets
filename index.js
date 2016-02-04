@@ -9,24 +9,24 @@ const defaults = {
   exclude_replies: false,
 };
 
-const getNextOptions = (options, tweets) =>
-  (isEmpty(tweets))
+function getNextOptions(options, tweets) {
+  return (isEmpty(tweets))
     ? options
     : merge(options, { max_id: pipe(last, prop('id_str'), dec)(tweets) });
+}
 
-function accumulate(get, options, tweets) {
+function accumulate(client, options, tweets) {
   const nextOptions = getNextOptions(options, tweets);
-  return get(nextOptions).then(res => {
-    const accumulatedTweets = concat(tweets, res);
-    return (isEmpty(res))
+  return client.get('statuses/user_timeline', nextOptions).then(({ data }) => {
+    const accumulatedTweets = concat(tweets, data);
+    return (isEmpty(data))
       ? accumulatedTweets
-      : accumulate(get, nextOptions, accumulatedTweets);
+      : accumulate(client, nextOptions, accumulatedTweets);
   });
 }
 
 export default function getTweets(tokens, username, sinceId) {
   const client = new Twitter(tokens);
-  const get = client.get.bind(client, 'statuses/user_timeline');
   const options = merge(defaults, { screen_name: username, since_id: sinceId });
-  return accumulate(get, options, []);
-};
+  return accumulate(client, options, []);
+}
