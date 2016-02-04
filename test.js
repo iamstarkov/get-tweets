@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+
 import { equal } from 'assert';
 import { last } from 'ramda';
 import getTweets from './index';
