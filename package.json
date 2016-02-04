@@ -32,8 +32,8 @@
   "dependencies": {
     "bignum-dec": "^1.0.0",
     "object-assign": "^4.0.1",
-    "ramda": "^0.18.0",
-    "twit": "^2.1.0"
+    "ramda": "^0.19.1",
+    "twit": "^2.2.2"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
