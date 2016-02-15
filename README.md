@@ -61,6 +61,16 @@ Type: `String`
 [dec]: https://github.com/iamstarkov/bignum-dec
 [user_timeline]: https://dev.twitter.com/rest/reference/get/statuses/user_timeline
 
+## Related
+
+* [get-twitter-info][get-twitter-info] — get info about target username
+* [get-twitter-followers][get-twitter-followers] — get followers for target username
+* [tweet-links][tweet-links] — extract links from tweet
+* [tweets-stats][tweets-stats] — get statistics from array of tweets
+* [twitter-mentions][twitter-mentions] — get latest mentions for target username
+* [twitter-profile-media][twitter-profile-media] — get twitter profile image and banner
+* [twitter-tokens][twitter-tokens] — get twitter tokens
+
 ## License
 
 MIT © [Vladimir Starkov](https://iamstarkov.com/)
@@ -76,3 +86,11 @@ MIT © [Vladimir Starkov](https://iamstarkov.com/)
 
 [depstat-url]: https://david-dm.org/iamstarkov/get-tweets
 [depstat-image]: https://img.shields.io/david/iamstarkov/get-tweets.svg?style=flat-square
+
+[get-twitter-info]: https://github.com/iamstarkov/get-twitter-info
+[get-twitter-followers]: https://github.com/iamstarkov/get-twitter-followers
+[tweet-links]: https://github.com/iamstarkov/tweet-links
+[tweets-stats]: https://github.com/iamstarkov/tweets-stats
+[twitter-mentions]: https://github.com/iamstarkov/twitter-mentions
+[twitter-profile-media]: https://github.com/andrepolischuk/twitter-profile-media
+[twitter-tokens]: https://github.com/iamstarkov/twitter-tokens
