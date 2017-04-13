@@ -31,18 +31,18 @@
   "homepage": "https://github.com/iamstarkov/get-tweets#readme",
   "dependencies": {
     "bignum-dec": "^1.0.0",
-    "ramda": "^0.19.1",
+    "ramda": "^0.23.0",
     "twit": "^2.2.2"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
     "babel-core": "^6.4.5",
-    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.3.13",
     "bignum-dec": "^1.0.1",
     "coveralls": "*",
-    "eslint": "^1.10.3",
-    "eslint-config-airbnb": "^5.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-require-path-exists": "^1.1.5",
     "isparta": "*",
     "mocha": "*",
